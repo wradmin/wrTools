@@ -52,8 +52,8 @@ exampleLink.onclick = function(e) {
     hideModal(scheduleExample);
   }
 
-  window.onkeydown = function() {
-    hideModal(scheduleExample);
+  window.onkeydown = function(e) {
+    if (e.code === "Escape") hideModal(scheduleExample);
   }
 }
 
