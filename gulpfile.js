@@ -92,11 +92,5 @@ gulp.task("build-html-min", function() {
     .pipe(gulp.dest("build/"));
 });
 
-// Build step 5: Old page transfer
-gulp.task("build-old-page-transfer", function() {
-  return gulp.src("src/table-schedule-converter/*.html")
-    .pipe(gulp.dest("build/table-schedule-converter/"));
-});
-
 // Build task
-gulp.task("build", gulp.series("build-folder-clean", "build-css-min", "build-js-min", "build-html-min", "build-old-page-transfer"));
+gulp.task("build", gulp.series("build-folder-clean", "build-css-min", "build-js-min", "build-html-min"));
