@@ -92,5 +92,11 @@ gulp.task("build-html-min", function() {
     .pipe(gulp.dest("build/"));
 });
 
+// Build step 5: images transfer
+gulp.task("build-img-transfer", function() {
+  return gulp.src("src/img/*.*")
+    .pipe(gulp.dest("build/img/"));
+});
+
 // Build task
-gulp.task("build", gulp.series("build-folder-clean", "build-css-min", "build-js-min", "build-html-min"));
+gulp.task("build", gulp.series("build-folder-clean", "build-css-min", "build-js-min", "build-html-min", "build-img-transfer"));
