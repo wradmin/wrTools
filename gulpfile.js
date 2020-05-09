@@ -8,37 +8,6 @@ const terser = require("gulp-terser-js");
 const htmlmin = require("gulp-htmlmin");
 const autoprefixer = require("gulp-autoprefixer");
 
-// ===================================
-// SERVER
-// ===================================
-
-// Dev Server
-gulp.task("dev", function() {
-  browserSync.init({
-    server: "src",
-    host: "192.168.0.104",
-    reloadDelay: 0,
-    reloadDebounce: 100,
-    notify: false,
-  });
-
-  gulp.watch("src/sass/**/*.scss", gulp.series("sass"));
-  gulp.watch("src/*.html").on("change", browserSync.reload);
-  gulp.watch("src/js/**/*.js").on("change", browserSync.reload);
-});
-
-// Prod server
-gulp.task("prod", function() {
-  browserSync.init({
-    server: "build",
-    host: "192.168.0.104",
-    reloadDelay: 0,
-    reloadDebounce: 100,
-    notify: false,
-  });
-});
-
-
 
 // ===================================
 // DEV TASKS
@@ -100,3 +69,35 @@ gulp.task("build-img-transfer", function() {
 
 // Build task
 gulp.task("build", gulp.series("build-folder-clean", "build-css-min", "build-js-min", "build-html-min", "build-img-transfer"));
+
+
+
+// ===================================
+// SERVER
+// ===================================
+
+// Dev Server
+gulp.task("dev", gulp.series("sass", function() {
+  browserSync.init({
+    server: "src",
+    host: "192.168.0.104",
+    reloadDelay: 0,
+    reloadDebounce: 100,
+    notify: false,
+  });
+
+  gulp.watch("src/sass/**/*.scss", gulp.series("sass"));
+  gulp.watch("src/*.html").on("change", browserSync.reload);
+  gulp.watch("src/js/**/*.js").on("change", browserSync.reload);
+}));
+
+// Prod server
+gulp.task("prod", function() {
+  browserSync.init({
+    server: "build",
+    host: "192.168.0.104",
+    reloadDelay: 0,
+    reloadDebounce: 100,
+    notify: false,
+  });
+});
