@@ -80,7 +80,8 @@ gulp.task("build", gulp.series("build-folder-clean", "build-css-min", "build-js-
 gulp.task("dev", gulp.series("sass", function() {
   browserSync.init({
     server: "src",
-    host: "192.168.0.104",
+    host: "192.168.0.109",
+    // port: 9999,
     reloadDelay: 0,
     reloadDebounce: 100,
     notify: false,
@@ -95,7 +96,8 @@ gulp.task("dev", gulp.series("sass", function() {
 gulp.task("prod", function() {
   browserSync.init({
     server: "build",
-    host: "192.168.0.104",
+    host: "192.168.0.109",
+    // port: 9999,
     reloadDelay: 0,
     reloadDebounce: 100,
     notify: false,

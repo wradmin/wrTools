@@ -4,6 +4,7 @@
 const inputField = document.querySelector(".converter__textarea--input");
 const outputField = document.querySelector(".converter__textarea--output");
 
+
 inputField.oninput = function() {
   const inputData = inputField.value;
   if (inputData !== "") {
@@ -26,7 +27,7 @@ function convertSchedule(inputData) {
   }
   return schedule;
 
-  
+
   function splitSchedule(inputData) {
     if (inputData.includes("\n")) {
       return inputData.split("\n");
@@ -63,7 +64,7 @@ function convertSchedule(inputData) {
 
   function combineHourMinutes([hour, minutes]) {
     let times = [];
-    
+
     for (item of minutes) {
       times.push(hour + ":" + item);
     }
@@ -81,28 +82,52 @@ const scheduleExample = document.querySelector(".scheduleExample");
 const modalUnderlay = document.querySelector(".modalUnderlay");
 const exampleLink = document.querySelector(".converter__exampleLink");
 
-exampleLink.onclick = function(e) {
-  e.preventDefault();
-  showModal(scheduleExample);
+
+document.onclick = function(e) {
+  if (e.target.hasAttribute("data-open-modal")) {
+    e.preventDefault();
+    let modalName = e.target.getAttribute("data-open-modal");
+    let modal = document.querySelector(`[data-modal-name="${modalName}"]`);
+    showModal(modal);
+  }
 }
 
 
 function showModal(modal) {
   modal.classList.add("modal--show");
   modalUnderlay.classList.add("modalUnderlay--show");
+  addHash("preview");
 
   modalUnderlay.onclick = function() {
-    hideModal(scheduleExample);
+    hideModal(modal);
   }
 
   document.onkeydown = function(e) {
     if (e.code === "Escape") {
-      hideModal(scheduleExample);
+      hideModal(modal);
+    }
+  }
+
+  window.onhashchange = function() {
+    if (location.hash === "") {
+      this.hideModal(modal);
     }
   }
 }
 
+
 function hideModal(modal) {
   modal.classList.remove("modal--show");
-  modalUnderlay.classList.remove("modalUnderlay--show"); 
+  modalUnderlay.classList.remove("modalUnderlay--show");
+  removeHash();
+}
+
+
+function addHash(hash) {
+  location.hash = hash;
+}
+
+
+function removeHash(hash) {
+  history.back();
 }
