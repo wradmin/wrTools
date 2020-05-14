@@ -130,5 +130,5 @@ function addHash(hash) {
 
 function removeHash() {
   location.hash = "";
-  location.href = location.href.slice(0, -1);
+  // location.href = location.href.slice(0, -1);
 }
