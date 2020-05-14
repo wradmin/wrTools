@@ -128,6 +128,7 @@ function addHash(hash) {
 }
 
 
-function removeHash(hash) {
-  history.back();
+function removeHash() {
+  location.hash = "";
+  location.href = location.href.slice(0, -1);
 }
