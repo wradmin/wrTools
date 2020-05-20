@@ -14,33 +14,63 @@ inputField.oninput = function() {
 
 
 function convertSchedule(inputData) {
-  let parts = splitSchedule(inputData);
-  let clearParts = [];
-  let schedule = [];
-  for (let item of parts) {
-    if (item.match(/\d/g) === null) continue;
-    let cleared = clearPart(item);
-    let reversed = reverseString(cleared);
-    let timeArray = reversed.match(/\d{1,2}/g);
+  let schedule = "";
+
+  let parts = splitScheduleIntoParts(inputData);
+  let recognizedParts = recognizeParts(parts);
+  console.log( recognizedParts );
+  
+  for (let item of recognizedParts) {
+    let reversedPart = reverseString(item);
+    
+    let timeArray = reversedPart.match(/\d{1,2}/g);
     let [hour, minutes] = separateAndRevers(timeArray);
     schedule += combineHourMinutes([hour, minutes]) + ", ";
   }
+
   return schedule;
 
 
-  function splitSchedule(inputData) {
+  function splitScheduleIntoParts(inputData) {
     if (inputData.includes("\n")) {
       return inputData.split("\n");
     } else if (inputData.includes(".")) {
       return inputData.split(".");
-    } else {
+    } else if (inputData.includes(",")) {
+      return inputData.split(",");
+    }
+    else {
       return [inputData];
     }
   }
 
+  
+  function isEmpty(part) {
+    if (part.match(/\d/g) === null) return true;
+    return false;
+  }
+
+
+  function recognizeParts(parts) {
+    let recognizedParts = [];
+
+    parts.forEach((item, index)=> {
+      if ( isEmpty(item) ) return;
+
+      let clearedPart = clearPart(item);
+      if (clearedPart.length < 3 && index !== 0) {
+        recognizedParts[recognizedParts.length - 1] += clearedPart;
+      } else {
+        recognizedParts.push(clearedPart);
+      }
+    })
+
+    return recognizedParts;
+  }
+
 
   function clearPart(part) {
-    return part.replace(/\D/g, "");
+    return part.replace(/[^0123456789:]/g, "");
   }
 
 
