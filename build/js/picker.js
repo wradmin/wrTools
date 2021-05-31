@@ -1,0 +1,1 @@
+"use strict";let input=document.querySelector("[data-picker='input']"),output=document.querySelector("[data-picker='output']");function pickTime(t){fillOutput(t.match(/\d?\d:\d\d/g).join(", "))}function fillOutput(t){output.value=t}function input_Input_Handler(t){pickTime(t.target.value)}input.addEventListener("input",input_Input_Handler);

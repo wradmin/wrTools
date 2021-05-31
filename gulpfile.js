@@ -47,7 +47,7 @@ gulp.task("build-css-min", function() {
 
 // Build step 3: JS min + transfer
 gulp.task("build-js-min", function() {
-  return gulp.src("src/js/main.js")
+  return gulp.src("src/js/*.js")
     .pipe(terser())
     .pipe(gulp.dest("build/js/"));
 });
@@ -77,7 +77,7 @@ gulp.task("build", gulp.series("build-folder-clean", "build-css-min", "build-js-
 // ===================================
 
 // Dev Server
-gulp.task("dev", gulp.series("sass", function() {
+gulp.task("default", gulp.series("sass", function() {
   browserSync.init({
     server: "src",
     host: "192.168.0.109",

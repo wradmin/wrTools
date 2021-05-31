@@ -1,8 +1,7 @@
-// ===================================
-// CONVERTER
-// ===================================
-const inputField = document.querySelector(".converter__textarea--input");
-const outputField = document.querySelector(".converter__textarea--output");
+"use strict";
+
+const inputField = document.querySelector(".converter__input");
+const outputField = document.querySelector(".converter__output");
 
 
 inputField.oninput = function() {
@@ -18,7 +17,7 @@ function convertSchedule(inputData) {
 
   let parts = splitScheduleIntoParts(inputData);
   let recognizedParts = recognizeParts(parts);
-  console.log( recognizedParts );
+  // console.log( recognizedParts );
   
   for (let item of recognizedParts) {
     let reversedPart = reverseString(item);
@@ -95,70 +94,10 @@ function convertSchedule(inputData) {
   function combineHourMinutes([hour, minutes]) {
     let times = [];
 
-    for (item of minutes) {
+    for (let item of minutes) {
       times.push(hour + ":" + item);
     }
 
     return times.join(", ");
   }
-}
-
-
-
-// ===================================
-// MODAL
-// ===================================
-const scheduleExample = document.querySelector(".scheduleExample");
-const modalUnderlay = document.querySelector(".modalUnderlay");
-const exampleLink = document.querySelector(".converter__exampleLink");
-
-
-document.onclick = function(e) {
-  if (e.target.hasAttribute("data-open-modal")) {
-    e.preventDefault();
-    let modalName = e.target.getAttribute("data-open-modal");
-    let modal = document.querySelector(`[data-modal-name="${modalName}"]`);
-    showModal(modal);
-  }
-}
-
-
-function showModal(modal) {
-  modal.classList.add("modal--show");
-  modalUnderlay.classList.add("modalUnderlay--show");
-  addHash("preview");
-
-  modalUnderlay.onclick = function() {
-    hideModal(modal);
-  }
-
-  document.onkeydown = function(e) {
-    if (e.code === "Escape") {
-      hideModal(modal);
-    }
-  }
-
-  window.onhashchange = function() {
-    if (location.hash === "") {
-      this.hideModal(modal);
-    }
-  }
-}
-
-
-function hideModal(modal) {
-  modal.classList.remove("modal--show");
-  modalUnderlay.classList.remove("modalUnderlay--show");
-  removeHash();
-}
-
-
-function addHash(hash) {
-  location.hash = hash;
-}
-
-
-function removeHash() {
-  location.hash = "";
-  // location.href = location.href.slice(0, -1);
 }

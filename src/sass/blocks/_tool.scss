@@ -1,9 +1,12 @@
-.toolsGroup {
+.tool {
+  margin-block-end: 30px;
+  
+  
   border: 1px solid #e5e5e5;
   border-radius: 5px;
 }
 
-.toolsGroup__title {
+.tool__title {
   margin: 0;
   padding: 10px 15px;
 
@@ -13,10 +16,17 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-.toolsGroup__content {
+.tool__content {
   padding: 15px;
 }
 
-.converter__label {
+.tool__label {
   margin: 0 0 5px;
+}
+
+.tool__textarea {
+  display: block;
+  width: 100%;
+  min-height: 150px;
+  margin-bottom: 20px;
 }
