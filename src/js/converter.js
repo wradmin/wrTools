@@ -17,7 +17,7 @@ function convertSchedule(inputData) {
 
   let parts = splitScheduleIntoParts(inputData);
   let recognizedParts = recognizeParts(parts);
-  // console.log( recognizedParts );
+  console.log( recognizedParts );
   
   for (let item of recognizedParts) {
     let reversedPart = reverseString(item);
