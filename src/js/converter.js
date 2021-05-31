@@ -1,13 +1,13 @@
 "use strict";
 
-const inputField = document.querySelector(".converter__input");
-const outputField = document.querySelector(".converter__output");
+const converterInput = document.querySelector(".converter__input");
+const converterOutput = document.querySelector(".converter__output");
 
 
-inputField.oninput = function() {
-  const inputData = inputField.value;
+converterInput.oninput = function() {
+  const inputData = converterInput.value;
   if (inputData !== "") {
-    outputField.value = convertSchedule(inputData);
+    converterOutput.value = convertSchedule(inputData);
   }
 }
 

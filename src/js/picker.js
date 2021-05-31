@@ -1,7 +1,7 @@
 "use strict";
 
-let input = document.querySelector("[data-picker='input']");
-let output = document.querySelector("[data-picker='output']");
+let pickerInput = document.querySelector("[data-picker='input']");
+let pickerOutput = document.querySelector("[data-picker='output']");
 
 // =============
 // Пример данных для подстановки и проверки
@@ -23,7 +23,7 @@ let output = document.querySelector("[data-picker='output']");
 
 
 // Обработчик каждого изменения поля "input"
-input.addEventListener("input", input_Input_Handler);
+pickerInput.addEventListener("input", input_Input_Handler);
 
 
 // =================================================================
@@ -87,7 +87,7 @@ function semicolonSeparator(time) {
 
 // Заполнить поле результата выборки
 function fillOutput(times) {
-  output.value = times.join(", ");
+  pickerOutput.value = times.join(", ");
 }
 
 
